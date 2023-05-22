@@ -57,8 +57,10 @@ require'nvim-treesitter.configs'.setup {
 
 -- rebinds
 vim.g.mapleader = ' '
-vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
+vvim.g.mapleader = ' '
+im.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true })
+
 
 -- Find files using Telescope command-line sugar.
 vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { noremap = true })
