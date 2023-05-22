@@ -2,7 +2,6 @@ vim.cmd('set nocompatible')
 vim.cmd('set ignorecase')
 vim.cmd('set smartcase')
 vim.cmd('set relativenumber')
-vim.cmd('set clipboard=unnamedplus')
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 
@@ -40,6 +39,9 @@ vim.cmd('colorscheme github_dark_high_contrast')
 
 require('lualine').get_config()
 require('lualine').setup()
+
+-- system clipboard copy
+vim.api.nvim_set_keymap('n', '*y', 'y', { noremap = true })
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
