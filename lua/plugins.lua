@@ -31,14 +31,31 @@ return require('packer').startup(function(use)
 	  require("toggleterm").setup()
 	end}
 
+	-- themes
+	use ({ 'projekt0n/github-nvim-theme' })
 	use { 'embark-theme/vim', as = 'embark' }
+	use 'folke/tokyonight.nvim'
 
 	use {
 		'nvim-treesitter/nvim-treesitter',
-		run = ':TSUpdate'
+		run = ':TSUpdate',
+		config = function()
+			require'nvim-treesitter.configs'.setup {
+			  highlight = {
+				enable = true,
+			  }
+			}
+  		end,
     }
 
 	use 'nvim-tree/nvim-web-devicons' -- OPTIONAL: for file icons
 	use 'lewis6991/gitsigns.nvim' -- OPTIONAL: for git status
 	use 'romgrk/barbar.nvim'
+
+	use "nvim-lua/plenary.nvim"
+
+	use {
+	  'nvim-lualine/lualine.nvim',
+	  requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+	}
 end)
