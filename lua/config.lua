@@ -37,6 +37,20 @@ require('github-theme').setup({
 -- setup must be called before loading
 vim.cmd('colorscheme github_dark_high_contrast')
 
+-- toggle term
+require("toggleterm").setup{
+	open_mapping = [[<c-\>]],
+    hide_numbers = true, -- hide the number column in toggleterm buffers
+    shade_filetypes = {},
+    shade_terminals = true,
+    shading_factor = 2, -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+    start_in_insert = true,
+    insert_mappings = true, -- whether or not the open mapping applies in insert mode
+    persist_size = false,
+}
+-- vim.api.nvim_set_keymap('n', '<C-\\>', ':ToggleTermToggleAll<cr>', { noremap = true })
+
+-- lualine
 require('lualine').get_config()
 require('lualine').setup()
 
@@ -80,6 +94,7 @@ vim.api.nvim_set_keymap('n', 'gd', '<Plug>(coc-definition)', { silent = true })
 vim.api.nvim_set_keymap('n', 'gy', '<Plug>(coc-type-definition)', { silent = true })
 vim.api.nvim_set_keymap('n', 'gi', '<Plug>(coc-implementation)', { silent = true })
 vim.api.nvim_set_keymap('n', 'gr', '<Plug>(coc-references)', { silent = true })
+vim.api.nvim_set_keymap('n', 'gf', '<Plug>(coc-fix-current)', { silent = true })
 
 -- show coc docs
 function _G.show_docs()
@@ -94,16 +109,25 @@ function _G.show_docs()
 end
 vim.keymap.set("n", "K", '<CMD>lua _G.show_docs()<CR>', {silent = true})
 
+vim.api.nvim_command('autocmd CursorHold * silent! call CocActionAsync("highlight")')
+vim.api.nvim_set_keymap('n', '<F2>', '<Plug>(coc-rename)', {silent = true})
+
 -- write commands
 vim.api.nvim_set_keymap('n', '<Leader>w', '<Esc>:w<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>q', '<Esc>:wq<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>qq', '<Esc>:wqa<CR>', { noremap = true })
 
--- buffer move
-vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true })
+-- move between buffers
+vim.api.nvim_set_keymap('n', '<C-j>', '<C-n><C-w>j', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-k>', '<C-n><C-w>k', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-l>', '<C-n><C-w>l', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-h>', '<C-n><C-w>h', { noremap = true })
+
+-- move between buffers in terminal mode
+vim.api.nvim_exec([[tnoremap <C-j> <C-\><C-n><C-w>j]], false)
+vim.api.nvim_exec([[tnoremap <C-k> <C-\><C-n><C-w>k]], false)
+vim.api.nvim_exec([[tnoremap <C-l> <C-\><C-n><C-w>l]], false)
+vim.api.nvim_exec([[tnoremap <C-h> <C-\><C-n><C-w>h]], false)
 
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
