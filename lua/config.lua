@@ -55,7 +55,7 @@ require('lualine').get_config()
 require('lualine').setup()
 
 -- system clipboard copy
-vim.api.nvim_set_keymap('n', '*y', 'y', { noremap = true })
+vim.api.nvim_set_keymap('n', '"*y', 'y', { noremap = true })
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -76,7 +76,7 @@ vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true })
 
 
 -- Find files using Telescope command-line sugar.
-vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>fp', '<cmd>Telescope find_files<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fb', '<cmd>Telescope buffers<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { noremap = true })
@@ -95,6 +95,9 @@ vim.api.nvim_set_keymap('n', 'gy', '<Plug>(coc-type-definition)', { silent = tru
 vim.api.nvim_set_keymap('n', 'gi', '<Plug>(coc-implementation)', { silent = true })
 vim.api.nvim_set_keymap('n', 'gr', '<Plug>(coc-references)', { silent = true })
 vim.api.nvim_set_keymap('n', 'gf', '<Plug>(coc-fix-current)', { silent = true })
+
+-- lazygit
+vim.api.nvim_set_keymap('n', '<Leader>gg', ':LazyGit<CR>', { silent = true })
 
 -- show coc docs
 function _G.show_docs()

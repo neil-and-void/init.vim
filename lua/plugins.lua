@@ -17,6 +17,15 @@ return require('packer').startup(function(use)
 	  requires = { {'nvim-lua/plenary.nvim'} }
 	}
 
+	-- nvim v0.7.2
+	use({
+		"kdheepak/lazygit.nvim",
+		-- optional for floating window border decoration
+		requires = {
+			"nvim-lua/plenary.nvim",
+		},
+	})
+
 	use {'neoclide/coc.nvim', branch = 'release'}
 
 	use {
