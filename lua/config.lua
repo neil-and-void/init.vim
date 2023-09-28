@@ -2,8 +2,8 @@ vim.cmd('set nocompatible')
 vim.cmd('set ignorecase')
 vim.cmd('set smartcase')
 vim.cmd('set relativenumber')
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
+-- Change the cursor color to hot pink
+vim.cmd([[highlight Cursor guifg=#FF69B4]])
 
 -- setup custom github theme
 require('github-theme').setup({
@@ -77,7 +77,7 @@ vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true })
 
 -- Find files using Telescope command-line sugar.
 vim.api.nvim_set_keymap('n', '<leader>fp', '<cmd>Telescope find_files<cr>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope live_grep<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fb', '<cmd>Telescope buffers<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { noremap = true })
 
@@ -139,10 +139,14 @@ vim.g.loaded_netrwPlugin = 1
 -- set termguicolors to enable highlight groups
 -- vim.opt.termguicolors = true
 
--- empty setup using defaults
-require("nvim-tree").setup()
+require("telescope").setup{
+	defaults = {
+		file_ignore_patterns = { "node_modules" },
+		dynamic_preview_title = true,
+	},
+}
 
--- OR setup with some options
+-- setup with some options
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
   view = {
@@ -150,6 +154,7 @@ require("nvim-tree").setup({
   },
   renderer = {
     group_empty = true,
+    highlight_modified = "all",
   },
   filters = {
     dotfiles = true,
